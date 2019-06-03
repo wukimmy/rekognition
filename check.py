@@ -1,14 +1,19 @@
 import boto3
-
+import json
 client = boto3.client('dynamodb')
 
+# class Elements:
+#     def getElements(self):
+content = []
 response = client.scan(
-    TableName='Nome da tabela',
+    TableName='nome da tabela',
     Select='SPECIFIC_ATTRIBUTES',
     AttributesToGet=[
-        'Filtro'
+        'type'
     ]
-    
 )
-
-print(response);
+for i in response['Items']:
+    content.append(i['type'])
+    a = str(i['type'])
+    print(a.split(':',6))
+# return content

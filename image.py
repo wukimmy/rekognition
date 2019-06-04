@@ -14,12 +14,17 @@ if __name__ == "__main__":
 
     el = Elements()
     contents = el.getElements()
-    print(contents)
+    neg = False
     for text in textDetections:
-            if int(text['Confidence'])> 97 :
-                for cont in contents:
-                    if text == cont:
-                        status = True
-    if status:
-
+        for cont in contents:
+            print(text['DetectedText'])
+            if text['DetectedText'].upper() == "SEM" or text['DetectedText'].upper() == "NÃO" or text['DetectedText'].upper() == "ZERO":
+                neg = True
+            if text['DetectedText'].lower() == cont:
+                status = True
+    if status and neg:
+        print('**ESSE PRODUTO NÃO POSSUI LACTOSE**')
+    else:
         print('**ESSE PRODUTO POSSUI LACTOSE**')
+    print("neg: " + str(neg))
+    print("status: " + str(status))

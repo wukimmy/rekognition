@@ -2,7 +2,7 @@ import boto3
 import json
 
 dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table('tablename')
+table = dynamodb.Table('products')
 
 class Elements:
         def getElements(self):
@@ -10,6 +10,7 @@ class Elements:
             items = response['Items'];
             contentlist =[]
             for item in items:
-                contentlist.append(item['intem name on table'])
+                contentlist.append(item['type'])
+
             return contentlist
 

@@ -1,12 +1,15 @@
 import boto3
 from Check import Elements
-
+from urllib.parse import urlparse, parse_qs
+url = 'vksdjnvkn?image=leite'
 if __name__ == "__main__":
     # Change the value of bucket to the S3 bucket that contains your image file.
-    bucket='bucket'
+    bucket='rekognition-sample-image'
     # Change the value of photo to your image file name.
-    photo='picture'
-
+    parsed = urlparse(url)
+    code  = parse_qs(parsed.query).get('image')[0]
+    photo=code+ '.jpg'
+    print(photo)
     client=boto3.client('rekognition')
     response=client.detect_text(Image={'S3Object':{'Bucket':bucket,'Name':photo}})
     status = False
